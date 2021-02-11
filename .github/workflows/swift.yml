@@ -1,0 +1,30 @@
+name: Swift
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+        matrix:
+          xcode: [12.3]
+          destination: ['platform=iOS Simulator,name=iPhone 11']
+    steps:
+      - run: swift --version
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Combine iOS Unit Tests
+        id: test_ios_app
+        run: |
+          xcodebuild clean build \
+          -project CombineStudy/CombineStudy.xcodeproj
+          -scheme CombineStudy
+          -destination "${destination}" \
+          -configuration Test \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO test
+        env: 
+          destination: ${{ matrix.destination }}
