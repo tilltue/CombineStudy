@@ -24,7 +24,6 @@ jobs:
           -project CombineStudy/CombineStudy.xcodeproj
           -scheme CombineStudy
           -destination "${destination}" \
-          -configuration Debug \
-          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO test;
+           test;
         env: 
           destination: ${{ matrix.destination }}
