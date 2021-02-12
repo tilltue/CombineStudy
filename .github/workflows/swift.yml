@@ -20,10 +20,6 @@ jobs:
       - name: Combine iOS Unit Tests
         id: test_ios_app
         run: |
-          xcodebuild clean build \
-          -project CombineStudy/CombineStudy.xcodeproj
-          -scheme CombineStudy
-          -destination "${destination}" \
-           test;
+          xcodebuild clean build test -project CombineStudy/CombineStudy.xcodeproj -scheme CombineStudy -destination "${destination}";
         env: 
           destination: ${{ matrix.destination }}
